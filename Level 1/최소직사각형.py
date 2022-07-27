@@ -7,5 +7,5 @@ def solution(sizes):
         w = max(i[0],w)
         h = max(i[1],h)
     answer= w*h
-        
+     
     return answer
