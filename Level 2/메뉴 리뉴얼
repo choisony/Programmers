@@ -1,0 +1,23 @@
+from itertools import combinations
+
+def solution(orders, course):
+    answer = []
+
+    for i in course:
+        d={}
+        for j in orders:
+            j= list(j)
+            j.sort()
+            for k in combinations(j,i):
+                t = ''.join(k)
+                d[t] = d.get(t,0) + 1
+        l = sorted(d.items(),key = lambda x : x[1],reverse=True)
+
+        idx=1
+        if l and l[0][1] >=2:
+            answer.append(l[0][0])
+            while(len(l) >=2 and l[idx][1] == l[0][1]):
+                answer.append(l[idx][0])
+                idx+=1
+        answer.sort()
+    return answer
