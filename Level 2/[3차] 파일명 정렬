@@ -1,0 +1,46 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/17686
+
+from functools import cmp_to_key
+    
+def cmp_by(a,b):
+    head_a= ''
+    head_b= ''
+    num_a= ''
+    num_b= ''
+    temp_a = False
+    temp_b = False
+    for i in a:
+        if ord(i)>=48 and ord(i)<=57:
+            temp_a = True
+            num_a+=i
+        elif temp_a ==True:
+            break
+        elif temp_a ==False:
+            head_a +=i
+        else:
+            continue
+    for i in b:
+        if ord(i)>=48 and ord(i)<=57:
+            temp_b = True
+            num_b+=i
+        elif temp_b ==True:
+            break
+        elif temp_b ==False:
+            head_b+=i
+        else:    
+            continue
+    
+    if head_a.lower() > head_b.lower():
+        return 1
+    elif head_a.lower() <head_b.lower():
+        return -1
+    else: 
+        if int(num_a) > int(num_b):
+            return 1
+        elif int(num_a) < int(num_b):
+            return -1
+        else:
+            return 0
+
+def solution(files):
+    return sorted(files, key= cmp_to_key(cmp_by))
