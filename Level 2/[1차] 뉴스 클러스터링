@@ -1,0 +1,42 @@
+https://school.programmers.co.kr/learn/courses/30/lessons/17677
+
+import math
+def solution(str1, str2):
+    answer = 0
+    if str1.lower()==str2.lower():
+        return 65536
+        
+    for i in str1:
+        if (ord(i) >=97 and ord(i)<=122) or (ord(i) >=65 and ord(i)<=90):
+            s1 += i
+    for i in str2:
+        if (ord(i) >=97 and ord(i)<=122) or (ord(i) >=65 and ord(i)<=90):
+            s2 += i
+    d1=[]
+    d2=[]
+    for i in range(len(str1)-1):
+        if str1[i].isalpha() and str1[i+1].isalpha():
+            d1.append(str1[i:i+2].lower())
+    for i in range(len(str2)-1):
+        if str2[i].isalpha() and str2[i+1].isalpha():
+            d2.append(str2[i:i+2].lower())
+    
+
+    d1_1 = d1.copy()
+    d1_2 = d1.copy()
+    for i in d2:
+        if i not in d1_1:
+            d1_2.append(i)
+        else:
+            d1_1.remove(i)
+
+    ## 다중집합 합집합 = d1_2
+    
+    d_c = []
+    for i in d1:
+        if i in d2:
+            d2.remove(i)
+            d_c.append(i)
+    ## 다중집합 교집합 = d_c
+    
+    return math.floor(len(d_c)/len(d1_2)*65536)
