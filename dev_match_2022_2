@@ -1,0 +1,86 @@
+# # def new(id):
+# #     idx = 0
+# #     for i in range(len(id)):
+# #         if id[i].isdigit():
+# #             idx = i
+# #             break
+# #     if idx ==0:
+# #         return id+"1"
+# #     else:
+# #         print(idx)
+# #         num = int(id[idx:])+1
+# #         id = id[:idx]+str(num)
+# #         return id
+# #
+# #
+# #
+# # def solution(registered_list, new_id):
+# #
+# #     if new_id in registered_list:
+# #         new1 = new(new_id)
+# #         print(new1)
+# #         solution(registered_list, new1)
+# #     else:
+# #         return new_id
+# #
+# # registered_list = ["cow","cow1"]
+# #
+# # print(solution(registered_list,"cow"))
+# #
+# #
+#
+# from itertools import permutations
+#
+# def solution(k):
+#     answer = -1
+#     num = [6,2,5,5,4,5,6,3,7,6]
+#     for i in range(1,k+1):
+#         for j in list(permutations(num,i)):
+#             print(j)
+#
+#     return answer
+# solution(11)
+
+maps = ["AABCA.QA", "AABC..QX", "BBBC.Y..", ".A...T.A", "....EE..", ".M.XXEXQ", "KL.TBBBQ"]
+
+
+
+
+
+def solution(maps):
+
+    answer = 0
+    visited = [[False]*len(maps[0]) for _ in range(len(maps))]
+    def dfs(x,y):
+        dx=[0,0,1,-1]
+        dy=[1,-1,0,0]
+
+        if maps[x][y] in d:
+            d[maps[x][y]]+=1
+        else:
+            d[maps[x][y]] = 1
+        if maps[x][y] !=".":
+            visited[x][y] =True
+        for i in range(4):
+            nx = x+dx[i]
+            ny = y+dy[i]
+            if nx>=0 and nx<len(maps) and ny>=0 and ny<len(maps[0]) and visited[nx][ny]==False and maps[nx][ny]!=".":
+                dfs(nx,ny)
+
+    for i in range(len(maps)):
+        for j in range(len(maps[0])):
+            if visited[i][j] == False and maps[i][j] !=".":
+                d={}
+                dfs(i,j)
+                d= sorted(d.items(),reverse=True,key = lambda x: (x[1],ord(x[0])))
+                print(d)
+                if len(d)>=2 and d[0][1] ==d[1][1]:
+                    temp =d[0][1]
+                    for k in d:
+                        if k[1] !=d[0][1]:
+                            temp +=k[1]
+                    print(temp)
+
+
+    return answer
+solution(maps)
